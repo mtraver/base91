@@ -1,4 +1,7 @@
 # base91
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/mtraver/base91)](https://goreportcard.com/report/github.com/mtraver/base91)
+
 A Go implementation of base91 encoding with an interface as close as possible to that of the standard library's `encoding/base64` (https://golang.org/pkg/encoding/base64).
 
 The `encoding/base64` `Encoding` type and this package's `Encoding` type both satisfy this interface:
