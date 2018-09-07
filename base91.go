@@ -47,12 +47,8 @@ type Encoding struct {
 
 // encodeStd is the standard base91 encoding alphabet (that is, the one specified
 // at http://base91.sourceforge.net). Of the 95 printable ASCII characters, the
-// following are omitted:
-//
-//   (space, 0x20)
-// ' (apostrophe, 0x27)
-// - (hyphen, 0x2d)
-// \ (backslash, 0x5c)
+// following four are omitted: space (0x20), apostrophe (0x27), hyphen (0x2d),
+// and backslash (0x5c).
 const encodeStd = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&()*+,./:;<=>?@[]^_`{|}~\""
 
 // NewEncoding returns a new Encoding defined by the given alphabet, which must
@@ -82,12 +78,8 @@ func NewEncoding(encoder string) *Encoding {
 
 // StdEncoding is the standard base91 encoding (that is, the one specified
 // at http://base91.sourceforge.net). Of the 95 printable ASCII characters,
-// the following are omitted:
-//
-//   (space, 0x20)
-// ' (apostrophe, 0x27)
-// - (hyphen, 0x2d)
-// \ (backslash, 0x5c)
+// the following four are omitted: space (0x20), apostrophe (0x27),
+// hyphen (0x2d), and backslash (0x5c).
 var StdEncoding = NewEncoding(encodeStd)
 
 /*
