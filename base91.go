@@ -90,8 +90,7 @@ var StdEncoding = NewEncoding(encodeStd)
 // be known before encoding takes place. EncodedLen(len(src)) may be used to
 // determine an upper bound on the output size when allocating a dst slice.
 func (enc *Encoding) Encode(dst, src []byte) int {
-	var queue uint = 0
-	var numBits uint = 0
+	var queue, numBits uint
 
 	n := 0
 	for i := 0; i < len(src); i++ {
@@ -160,8 +159,7 @@ func (e CorruptInputError) Error() string {
 // bytes to dst and returns the number of bytes written. If src contains invalid base91
 // data, it will return the number of bytes successfully written and CorruptInputError.
 func (enc *Encoding) Decode(dst, src []byte) (int, error) {
-	var queue uint = 0
-	var numBits uint = 0
+	var queue, numBits uint
 	var v int = -1
 
 	n := 0
