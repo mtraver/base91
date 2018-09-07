@@ -39,13 +39,15 @@ import (
 	"math"
 )
 
+// An Encoding is a base 91 encoding/decoding scheme defined by a 91-character alphabet.
 type Encoding struct {
 	encode    [91]byte
 	decodeMap [256]byte
 }
 
-// encodeStd is the standard base91 encoding alphabet. Of the 95 printable ASCII
-// characters, the following have been omitted:
+// encodeStd is the standard base91 encoding alphabet (that is, the one specified
+// at http://base91.sourceforge.net). Of the 95 printable ASCII characters, the
+// following are omitted:
 //
 //   (space, 0x20)
 // ' (apostrophe, 0x27)
@@ -78,7 +80,14 @@ func NewEncoding(encoder string) *Encoding {
 	return e
 }
 
-// StdEncoding is the standard base91 encoding.
+// StdEncoding is the standard base91 encoding (that is, the one specified
+// at http://base91.sourceforge.net). Of the 95 printable ASCII characters,
+// the following are omitted:
+//
+//   (space, 0x20)
+// ' (apostrophe, 0x27)
+// - (hyphen, 0x2d)
+// \ (backslash, 0x5c)
 var StdEncoding = NewEncoding(encodeStd)
 
 /*
@@ -149,6 +158,7 @@ func (enc *Encoding) EncodedLen(n int) int {
  * Decoder
  */
 
+// A CorruptInputError is returned if invalid base91 data is encountered during decoding.
 type CorruptInputError int64
 
 func (e CorruptInputError) Error() string {
