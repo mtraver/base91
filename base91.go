@@ -139,10 +139,9 @@ func (enc *Encoding) EncodeToString(src []byte) string {
 // EncodedLen returns an upper bound on the length in bytes of the base91 encoding
 // of an input buffer of length n. The true encoded length may be shorter.
 func (enc *Encoding) EncodedLen(n int) int {
-	// TODO(mtraver) Figure out better bounds. The formula in DecodedLen wasn't
-	// quite right, so maybe this formula has problems too?
-
-	// At worst, base91 encodes 13 bits into 16 bits.
+	// At worst, base91 encodes 13 bits into 16 bits. Even though 14 bits can
+	// sometimes be encoded into 16 bits, assume the worst case to get the upper
+	// bound on encoded length.
 	return int(math.Ceil(float64(n) * 16.0 / 13.0))
 }
 
@@ -215,14 +214,7 @@ func (enc *Encoding) DecodeString(s string) ([]byte, error) {
 // DecodedLen returns the maximum length in bytes of the decoded data
 // corresponding to n bytes of base91-encoded data.
 func (enc *Encoding) DecodedLen(n int) int {
-	// At worst, base91 encodes 13 bits into 16 bits.
-	// return int(math.Ceil(float64(n) * 13.0 / 16.0))
-
-	// TODO(mtraver) Figure out better bounds. The formula above doesn't always
-	// work. Here are some real-life failures:
-	//   returned 3239 for n=3986, actual decoded len 3244
-	//   returned 3179 for n=3912, actual decoded len 3182
-
-	// The decoded message will certainly be shorter than the encoded message.
-	return n
+	// At best, base91 encodes 14 bits into 16 bits, so assume that the input is
+	// optimally encoded to get the upper bound on decoded length.
+	return int(math.Ceil(float64(n) * 14.0 / 16.0))
 }
