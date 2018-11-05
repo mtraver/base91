@@ -116,7 +116,7 @@ func TestDecode(t *testing.T) {
 func TestDecodeInvalidData(t *testing.T) {
 	cases := []string{
 		"~_1H=x_t{ |$AjJX(nMFdjL~:?1b3HgM", // Spaces are not in the standard encoding alphabet.
-		"-", "\\", "'", // These characters are not in the standard encoding alphabet.
+		"-", "\\", "'",                     // These characters are not in the standard encoding alphabet.
 	}
 
 	for i, tc := range cases {
